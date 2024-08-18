@@ -14,6 +14,8 @@ const ProductDetails = () => {
     const [alert, setAlert] = useState({ severity: '', message: '', open: false });
     const AppContextAPI = useContext(AppContext);
     const Theme = AppContextAPI.theme;
+
+    //get product by id
     useEffect(() => {
         const getProduct = async () => {
             setIsLoading(true);
@@ -29,6 +31,8 @@ const ProductDetails = () => {
         }
         getProduct();
     }, [id])
+
+    //handle Snackbar closing
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;

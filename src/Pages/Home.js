@@ -36,6 +36,7 @@ const Home = () => {
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     let currentProducts = shownProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
+    //get all products and categories
     useEffect(() => {
         const getProducts = async () => {
             setIsLoading(true);
@@ -69,6 +70,7 @@ const Home = () => {
         getProducts();
     }, [AddCategoryListContext, AddProductsContext, CategoryListContext, ProductContext]);
 
+    //filter products
     const handleCategoryChange = async (category, priceRange) => {
         setIsLoading(true);
         try {
@@ -83,6 +85,7 @@ const Home = () => {
         }
     };
 
+    //handle search
     const handleSearch = (event) => {
         const title = event.target.value.toLowerCase();
         if (title.length === 0) {
@@ -93,6 +96,7 @@ const Home = () => {
         }
 
     }
+    //handle sorting
     const handleSort = async () => {
         setIsLoading(true);
         let type = sortType.current;
@@ -101,6 +105,7 @@ const Home = () => {
         setshownProducts([...sortedProducts]);
         setIsLoading(false);
     }
+    //handle Snackbar closing
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
