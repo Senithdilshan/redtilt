@@ -1,4 +1,4 @@
-export const sortProducts = async (products, type = null, order = 'asc') => {
+export const sortProducts = (products, type = null, order = 'asc') => {
     return products.sort((a, b) => {
         let valueA, valueB;
 

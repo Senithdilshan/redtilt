@@ -4,6 +4,8 @@ import { AppContext } from '../Store/Store';
 import { getProductById } from '../Helpers/API.helper';
 import { Alert, Skeleton, Snackbar } from '@mui/material';
 import StarRating from '../Components/StarRating/StarRating';
+import * as FA6 from "react-icons/fa6";
+
 const ProductDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -45,9 +47,9 @@ const ProductDetails = () => {
                     {alert.message}
                 </Alert>
             </Snackbar>
-            <div className={` ${Theme === "dark" ? "bg-slate-500 text-white" : "bg-white"}  p-5 rounded-xl w-full`}>
-                <div className='cursor-pointer font-bold' onClick={() => navigate(-1)}>Back</div>
-                <div className='flex justify-center'>
+            <div className={` ${Theme === "dark" ? "bg-slate-500 text-white" : "bg-white"}  p-5 rounded-xl w-full h-fit`}>
+                <span className='cursor-pointer ' onClick={() => navigate(-1)}> <FA6.FaCircleArrowLeft /></span>
+                <div className='flex justify-center mt-2'>
                     {isLoading ?
                         <Skeleton variant="rectangular" className='w-[40rem] sm:w-[25rem] rounded-lg mb-6' height={50} /> :
                         <div className='font-bold text-xl sm:text-3xl mb-6 text-center w-[30rem] sm:w-[50rem]'>{product.title}</div>

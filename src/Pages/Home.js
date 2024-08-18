@@ -57,7 +57,10 @@ const Home = () => {
                     setCategoryList(CategoryListContext);
                 }
                 setIsLoading(false);
-                setAlert({ severity: 'success', message: 'Data fetched successfully.', open: true });
+                if (ProductContext?.length === 0 || CategoryListContext?.length === 0) {
+                    setAlert({ severity: 'success', message: 'Data fetched successfully.', open: true });
+                }
+
             } catch (error) {
                 console.log(error);
                 setAlert({ severity: 'error', message: 'Something went wrong.', open: true });
@@ -137,7 +140,7 @@ const Home = () => {
                 setIsGridView={setIsGridView}
                 isGridView={isGridView}
             />
-            {currentProducts.length === 0 && <NoData />}
+            {(currentProducts.length === 0 && !isLoading) && <NoData />}
             <div className='flex w-full justify-center'>
                 <div
                     className={`w-full ${isGridView

@@ -5,6 +5,8 @@ import CommonButton from '../UI/Buttons/CommonButton';
 import { CategoriesString } from '../../Constants/Categories';
 import MUISlider from '../UI/Sliders/MUISlider';
 import { AppContext } from '../../Store/Store';
+import * as FA6 from "react-icons/fa6";
+import * as MD from "react-icons/md";
 
 const FilterModal = ({
     isFilterModalOpen,
@@ -46,9 +48,22 @@ const FilterModal = ({
                             <MUISlider minRange={100} min={0} max={1000} step={100} getRange={setPriceRange} priceRange={priceRange} />
                         </div>
                         <div className='flex justify-end'>
-                            <CommonButton text={'Clear'}
-                                onclick={handleClear} bgColor={'bg-orange-400'} textColor={Theme === "dark" && "text-black"} disabled={false} />
-                            <CommonButton text={'Filter'} onclick={handleFilter} bgColor={Theme === "dark" ? "bg-white" : "bg-indigo-400"} textColor={Theme === "dark" && "text-black"} disabled={false} />
+                            <CommonButton
+                                Icon={<MD.MdDeleteOutline />}
+                                text={'Clear'}
+                                onclick={handleClear}
+                                bgColor={'bg-orange-400'}
+                                textColor={Theme === "dark" && "text-black"}
+                                disabled={false}
+
+                            />
+                            <CommonButton
+                                Icon={<FA6.FaFilter />}
+                                text={'Filter'}
+                                onclick={handleFilter}
+                                bgColor={Theme === "dark" ? "bg-white" : "bg-indigo-400"}
+                                textColor={Theme === "dark" && "text-black"}
+                                disabled={false} />
                         </div>
 
                     </div>
