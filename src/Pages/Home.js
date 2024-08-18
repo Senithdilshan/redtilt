@@ -10,6 +10,7 @@ import { sortProducts } from '../Util/ProductSort';
 import SortFilterSection from '../Components/SortFilterSection/SortFilterSection';
 import { AppContext } from '../Store/Store';
 import { useMUIStyles } from '../Constants/MaterialStyles';
+import NoData from '../Components/NoData/NoData';
 
 const Home = () => {
     const [isGridView, setIsGridView] = useState(true);
@@ -18,13 +19,18 @@ const Home = () => {
     const [Products, setProducts] = useState([]);
     const [shownProducts, setshownProducts] = useState([]);
     const [categoryList, setCategoryList] = useState([]);
-    const sortOrder = useRef(sortTypes.ASC);
-    const sortType = useRef(sortTypes.NONE);
     const [page, setPage] = useState(1);
     const [alert, setAlert] = useState({ severity: '', message: '', open: false });
+    const sortOrder = useRef(sortTypes.ASC);
+    const sortType = useRef(sortTypes.NONE);
     const AppContextAPI = useContext(AppContext);
 
     const Theme = AppContextAPI.theme;
+    const ProductContext = AppContextAPI.products;
+    const CategoryListContext = AppContextAPI.categoryList;
+    const AddProductsContext = AppContextAPI.addProducts;
+    const AddCategoryListContext = AppContextAPI.addCategoryList;
+
     const productsPerPage = 6;
     const indexOfLastProduct = page * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -34,11 +40,22 @@ const Home = () => {
         const getProducts = async () => {
             setIsLoading(true);
             try {
-                const response = await getAllProducts();
-                const responseCategories = await getAllCategories();
-                setCategoryList(responseCategories);
-                setshownProducts(response);
-                setProducts(response);
+                if (ProductContext?.length === 0) {
+                    const response = await getAllProducts();
+                    AddProductsContext(response);
+                    setshownProducts(response);
+                    setProducts(response);
+                } else {
+                    setshownProducts(ProductContext);
+                    setProducts(ProductContext);
+                }
+                if (CategoryListContext?.length === 0) {
+                    const responseCategories = await getAllCategories();
+                    AddCategoryListContext(responseCategories);
+                    setCategoryList(responseCategories);
+                } else {
+                    setCategoryList(CategoryListContext);
+                }
                 setIsLoading(false);
                 setAlert({ severity: 'success', message: 'Data fetched successfully.', open: true });
             } catch (error) {
@@ -47,11 +64,8 @@ const Home = () => {
             }
         }
         getProducts();
-    }, []);
+    }, [AddCategoryListContext, AddProductsContext, CategoryListContext, ProductContext]);
 
-    const handlePageChange = (event, value) => {
-        setPage(value);
-    };
     const handleCategoryChange = async (category, priceRange) => {
         setIsLoading(true);
         try {
@@ -123,6 +137,7 @@ const Home = () => {
                 setIsGridView={setIsGridView}
                 isGridView={isGridView}
             />
+            {currentProducts.length === 0 && <NoData />}
             <div className='flex w-full justify-center'>
                 <div
                     className={`w-full ${isGridView
@@ -143,7 +158,7 @@ const Home = () => {
                     <Pagination
                         count={Math.ceil(shownProducts.length / productsPerPage)}
                         page={page}
-                        onChange={handlePageChange}
+                        onChange={(event, value) => setPage(value)}
                         sx={Theme === "dark" ? useMUIStyles.dark : useMUIStyles.light}
                     />}
             </div>
