@@ -31,7 +31,7 @@ This project is a responsive e-commerce product listing page built with React.js
 
 1. **Clone the repository**:
 
-   git clone https://github.com/Senithdilshan/redtilt
+   git clone https://github.com/Senithdilshan/redtilt.git
    cd react-ecommerce-product-listing
 
 2. **Install dependencies**:
