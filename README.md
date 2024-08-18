@@ -8,7 +8,7 @@ This project is a responsive e-commerce product listing page built with React.js
 
 - **Product Listing**: Fetches and displays products from the FakeStoreAPI with essential details like image, name, price, and a brief description.
 - **Search Functionality**: Allows users to search for products by name with real-time updates.
-- **Filtering**: Users can filter products based on categories, price range, and availability.
+- **Filtering**: Users can filter products based on categories, price and range.
 - **Sorting**: Products can be sorted by price (ascending/descending), name, and rating.
 - **Responsive Design**: The product listing page is fully responsive and works well on mobile, tablet, and desktop devices.
 - **State Management**: Managed with React's built-in state and hooks (`useState`, `useEffect, contextAPI`).
@@ -31,8 +31,8 @@ This project is a responsive e-commerce product listing page built with React.js
 
 1. **Clone the repository**:
 
-   git clone https://github.com/Senithdilshan/redtilt.git
-   cd redtilt
+   - git clone https://github.com/Senithdilshan/redtilt.git
+   - cd redtilt
 
 2. **Install dependencies**:
 
